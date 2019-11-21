@@ -1,7 +1,13 @@
-import {request} from './network/network.js'
+import {request,newnet} from './network'
 
-export function getmultidata(options){
+export function getmultidata(){
     return request({
+        url:'/home/multidata'
+    })
+}
+
+export function getmultidata2(){
+    return newnet({
         url:'/home/multidata'
     })
 }
