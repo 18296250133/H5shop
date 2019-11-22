@@ -7,7 +7,7 @@
     </navbar>
 
     <!-- 轮播图 -->
-     <mt-swipe :auto="4000">
+     <mt-swipe :auto="0">
       <mt-swipe-item v-for="(site,index) in banner" :key="index" >
         <img :src="site.image"/>
       </mt-swipe-item>
@@ -55,14 +55,16 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style  scoped lang="scss">
    img {
    width: 100%;
  }
- .mint-swipe {
+ .mint-swipe { 
  height: 218px;
  }
- .mint-swipe-indicators {
-     bottom: px(54);
- }
+   
+     .mint-swipe ::v-deep .mint-swipe-indicators{
+                bottom: 24px;
+              }
+  
 </style>
