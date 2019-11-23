@@ -2,7 +2,7 @@
     <div class="box">
         <div class="item" v-for="(value,index) in list_category" :key="index">
              <div :class="{active:currentIndex==index}">
-                 <span>{{value}} {{index}} {{currentIndex}}</span>
+                 <span>{{value}} </span>
              </div>
         </div>
     </div>
