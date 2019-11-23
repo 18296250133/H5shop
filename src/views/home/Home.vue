@@ -1,18 +1,26 @@
 <template>
-    <div class="box">
+    <div id="box">
         
-        <!-- 头部导航栏 -->
+   <!-- 头部导航栏 -->
     <navbar :bgcolor='backgoundcolors' fontcolor='white' class="nav">
         <div slot="center">购物街</div>
     </navbar>
 
     <!-- 轮播图 -->
-     <mt-swipe :auto="0">
-      <mt-swipe-item v-for="(site,index) in banner" :key="index" >
-        <img :src="site.image"/>
-      </mt-swipe-item>
-      
-</mt-swipe>
+   <swipe :banner="banner"></swipe>
+    
+    <!-- 每日推荐 -->
+    <recommend :recommend="recommend"/>
+
+     <!-- 本周流行 -->
+      <div class="prevalent">
+          <img src="../../assets/img/home/recommend_bg.jpg"/>
+      </div>
+    
+    <!-- 分类数据 -->
+    <control :list_category="list_category"/>
+
+
     </div>
 </template>
 
@@ -26,14 +34,19 @@ export default {
     
     data(){
         return {
-            backgoundcolors:backgoundcolor,
-            banner:[]
+            backgoundcolors:backgoundcolor, //tabar选中后颜色
+            banner:[], //轮播图
+            recommend:[],//每日推荐
+            list_category:['流行','热销','上新'] //首页分类流行
             
         }
     },
     name:'home',
     components:{
-        navbar:()=> import('../../components/content/navbar/navbar')
+        navbar:()=> import('../../components/content/navbar/navbar'),
+        swipe:()=> import('./childcomponents/swipe.vue'),
+        recommend:()=>import('./childcomponents/recommend.vue'),
+        control:()=>import('../../components/content/control/control.vue')
     },
 
     methods:{
@@ -43,8 +56,9 @@ export default {
             
             getmultidata().then(res=>{
                 this.banner=res.data.data.banner.list;
-                console.log(res.data.data.banner.list)
-                console.log(this.banner[0].image);
+               console.log(res.data);
+                this.recommend=res.data.data.recommend.list
+               
             }).catch(err=>{
                 console.log(err);
             })
@@ -56,15 +70,19 @@ export default {
 </script>
 
 <style  scoped lang="scss">
-   img {
-   width: 100%;
+
+#box {
+    height: 100%;
+    width: 100%;
+    margin-bottom: px(90)
+}
+ .prevalent {
+     width: 100%;
+     height: px(260);
  }
- .mint-swipe { 
- height: 218px;
+ .prevalent img {
+      width: 100%;
+      height: 100%;
  }
-   
-     .mint-swipe ::v-deep .mint-swipe-indicators{
-                bottom: 24px;
-              }
   
 </style>

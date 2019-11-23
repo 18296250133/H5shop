@@ -1,17 +1,14 @@
 <template>
-    <div>Catory
-
-<a>aasas</a>
+    <div>
 
     </div>
 </template>
-
 <script>
 export default {
-    name:"Category"
+    name:'prevalent'
 }
 </script>
 
 <style lang="scss" scoped>
-
+   
 </style>

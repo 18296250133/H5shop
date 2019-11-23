@@ -1,13 +1,13 @@
 <template>
   <div>
-     <tabcontainer>
+     <tabcontainer id="tabber">
        <tabitem path="/home" activecolor="pink">
          <img src="../../../assets/img/tabbar/home.svg" slot="item-icon">
           <img src="../../../assets/img/tabbar/home_active.svg" slot="item-icon-active">
          <div slot="item-text">首页</div>
        </tabitem>
 
-       <tabitem path="/catory" activecolor="pink">
+       <tabitem path="/category" activecolor="pink">
          <img src="../../../assets/img/tabbar/category.svg" slot="item-icon">
          <img src="../../../assets/img/tabbar/category_active.svg" slot="item-icon-active">
          <div slot="item-text">分类</div>
@@ -38,3 +38,10 @@ export default {
      }
 }
 </script>
+
+<style lang="scss" scoped>
+  #tabber {
+    background-color: #fff;
+    
+  }
+</style>
