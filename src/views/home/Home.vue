@@ -18,8 +18,13 @@
       </div>
     
     <!-- 分类数据 -->
-    <control :list_category="list_category"/>
+    <control :list_category="list_category" @getindex="getindex"/>
 
+
+          <div v-for="(item,index) in goods[currentVaule].list" :key="index">
+              {{currentVaule}}
+              <span>{{item.title}}</span>
+          </div>
 
     </div>
 </template>
@@ -27,7 +32,7 @@
 <script>
 // 导入scss文件中定义的颜色变量
 import {backgoundcolor} from '../../assets/css/index.scss'
- import {getmultidata} from '../../network/home.js'
+ import {getmultidata,getcategory} from '../../network/home.js'
 
 
 export default {
@@ -37,7 +42,13 @@ export default {
             backgoundcolors:backgoundcolor, //tabar选中后颜色
             banner:[], //轮播图
             recommend:[],//每日推荐
-            list_category:['流行','热销','上新'] //首页分类流行
+            list_category:['流行','热销','上新'], //首页分类流行
+            goods:{
+                'pop':{page:1,list:[]},
+                'new':{page:1,list:[]},
+                'sell':{page:1,list:[]},
+            },
+            currentVaule:'pop'
             
         }
     },
@@ -50,19 +61,60 @@ export default {
     },
 
     methods:{
-       
+        //获取当前被选中的值
+        getindex(index){
+            
+             switch(index){
+                 case 0:
+                     this.currentVaule='pop';
+                     break;
+                 case 1:
+                     this.currentVaule='new';
+                     break;
+                 case 2:
+                     this.currentVaule='sell';
+                     break;
+             }
+             console.log('currentVaule:',this.currentVaule);
+              
+        },
+
+
+    //获取首页分类数据
+        gethomecategory(cata){
+            console.log(111);
+            let page=this.goods[cata].page;
+            let list =this.goods[cata].list
+        
+            console.log('page',page);
+           
+           
+            getcategory(cata,page).then(res=>{
+               
+                list.push(...res.data.data.list);
+        
+                this.goods[cata].list=list;
+                this.goods[cata].page= ++page;
+            })
+           
+         
+        }  
     },
      created() {
-            
+            //获取banner recommend 数据
             getmultidata().then(res=>{
                 this.banner=res.data.data.banner.list;
-               console.log(res.data);
+            //    console.log(res.data);
                 this.recommend=res.data.data.recommend.list
                
             }).catch(err=>{
                 console.log(err);
             })
 
+            //获取首页分类数据
+            this.gethomecategory('pop');
+            this.gethomecategory('new');
+            this.gethomecategory('sell');
 
             
         }

@@ -11,3 +11,13 @@ export function getmultidata2(){
         url:'/home/multidata'
     })
 }
+
+export function getcategory(type,page){
+    return newnet({
+        url:'/home/data',
+        params:{
+            type,
+            page
+        }
+    })
+}

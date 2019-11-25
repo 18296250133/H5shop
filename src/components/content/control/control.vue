@@ -1,8 +1,8 @@
 <template>
     <div class="box">
-        <div class="item" v-for="(value,index) in list_category" :key="index">
-             <div :class="{active:currentIndex==index}">
-                 <span>{{value}} </span>
+        <div class="item" v-for="(value,index) in list_category" :key="index" @click="isclick(index)">
+             <div :class=" {active:currentIndex==index} ">
+                 <span  class="content">{{value}} </span>
              </div>
         </div>
     </div>
@@ -20,6 +20,13 @@ export default {
         return{
             currentIndex:0
         }
+    },
+    methods:{
+        isclick(index){
+            //console.log(index);
+            this.currentIndex=index;
+            this.$emit('getindex',index)
+        }
     }
 }
 </script>
@@ -34,9 +41,18 @@ export default {
   }
   .item {
       flex:1;
+     
+  }
+  span {
+      padding-bottom: px(6);
   }
 
   .active {
-      color: pink;
+      color: #ff5777;
+     
   }
+
+   .active span {
+      border-bottom: px(2) solid #ff5777;
+   }
 </style>
