@@ -1,11 +1,8 @@
 <template>
-    <div class="box">
-        <div>
-          
+    <div class="containers">         
              <goodsitem v-for="(value,index) in goodcurrentlist" :key="index"
               :good_items="value" class="gooditem" 
-              ></goodsitem>
-        </div>
+              ></goodsitem>  
     </div>
 </template>
 
@@ -32,9 +29,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .box .gooditem {
+  .containers >.gooditem {
+      width: 47%;
+  }
+
+  .containers {
+      margin-top: px(10);
       display: flex;
-      flex-direction: row;
-      width: 48%;
+      flex-wrap: wrap;
+      justify-content: space-around;
   }
 </style>

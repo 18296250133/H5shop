@@ -5,9 +5,9 @@
         </div>
         <div class="info">
             <div class="title">{{good_items.title}}</div>
-             <div>
-                 <span>{{good_items.price}}</span>
-                 <span>{{good_items.cfav}}</span>
+             <div class="info-other">
+                 <span class="price">{{good_items.price}}</span>
+                 <span class="cfav">{{good_items.cfav}}</span>
              </div>
         </div>
     </div>
@@ -41,16 +41,27 @@ export default {
     overflow: hidden;
 
 }
+.box {
+    width: 100%;
+}
 
 .item-img {
-   width: 100%;
+    width: 100%;
 }
- .box {
-     display: flex;
-     flex-direction: column;
- }
-    .box img {
-        
-        height: px(240);
-    }
+
+.item-img img {
+    width: 100%;
+    border-radius: px(10);
+}
+.info-other {
+    text-align:center;
+}
+
+.info-other .cfav::before{
+    display:inline-block;
+    content: '';
+    width: 14px;
+    height: 14px;
+     background: url("../../../assets/img/common/favor.png") 0 0/14px 14px;
+}
 </style>
