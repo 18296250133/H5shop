@@ -21,10 +21,12 @@
     <control :list_category="list_category" @getindex="getindex"/>
 
 
-          <div v-for="(item,index) in goods[currentVaule].list" :key="index">
+          <!-- <div v-for="(item,index) in goods[currentVaule].list" :key="index">
               {{currentVaule}}
               <span>{{item.title}}</span>
-          </div>
+          </div> -->
+
+          <goodscontainer :goodcurrentlist="goods[currentVaule].list"/>
 
     </div>
 </template>
@@ -57,7 +59,8 @@ export default {
         navbar:()=> import('../../components/content/navbar/navbar'),
         swipe:()=> import('./childcomponents/swipe.vue'),
         recommend:()=>import('./childcomponents/recommend.vue'),
-        control:()=>import('../../components/content/control/control.vue')
+        control:()=>import('../../components/content/control/control.vue'),
+        goodscontainer:()=>import('../../components/content/goods/goodscontainer')
     },
 
     methods:{
