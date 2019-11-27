@@ -6,7 +6,7 @@
         <div slot="center">购物街</div>
     </navbar>
      
-<mscroll class="mscroll">
+<mscroll class="mscroll" ref="scroll" @checkposition="getposition">
               
          
     <!-- 轮播图 -->
@@ -31,7 +31,8 @@
   <goodscontainer :goodcurrentlist="goods[currentVaule].list"/>
      </mscroll>      
           
-
+     <!-- 回到顶部 -->
+     <totop @click.native="backtop" :ispro="3" v-if="showtotop"/>
     </div>
 </template>
 
@@ -54,7 +55,8 @@ export default {
                 'new':{page:1,list:[]},
                 'sell':{page:1,list:[]},
             },
-            currentVaule:'pop'
+            currentVaule:'pop',
+            showtotop:false
             
         }
     },
@@ -65,7 +67,8 @@ export default {
         recommend:()=>import('./childcomponents/recommend.vue'),
         control:()=>import('../../components/content/control/control.vue'),
         goodscontainer:()=>import('../../components/content/goods/goodscontainer'),
-        mscroll:()=> import('../../components/common/bretter-scroll/m-scroll')
+        mscroll:()=> import('../../components/common/bretter-scroll/m-scroll'),
+        totop:()=>import('../../components/content/home/totop')
     },
 
     methods:{
@@ -106,8 +109,19 @@ export default {
             })
            
          
-        }  
-    },
+        }  ,
+        //回到顶部
+        backtop(){
+           //console.log(111);
+           this.$refs.scroll.bscroll.scrollTo(0,0,500);
+        } ,
+        //获取子组件传递过来的position值
+        getposition(position){
+           console.log(position.y);
+            this.showtotop=Math.abs(position.y) >1000 ? true :false;
+            console.log(this.showtotop);
+        }
+           },
      created() {
             //获取banner recommend 数据
             getmultidata().then(res=>{
@@ -153,7 +167,7 @@ export default {
 
      #controls{
       position: sticky;
-      top: px(44);
+      top: px(0);
         background-color: pink;
         z-index: 9;
     }

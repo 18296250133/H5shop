@@ -9,6 +9,7 @@ module.exports={
         }
       },
       devServer :{
-        host:'192.168.2.112'
+
+        host:'192.168.152.1'
       }
 }
