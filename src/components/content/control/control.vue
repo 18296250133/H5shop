@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
   .box {
+      width: 100%;
       display: flex;
       text-align: center;
       height: px(40);

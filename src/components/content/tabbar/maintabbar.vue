@@ -42,6 +42,7 @@ export default {
 <style lang="scss" scoped>
   #tabber {
     background-color: #fff;
+    z-index: 999;
     
   }
 </style>

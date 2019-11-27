@@ -1,6 +1,6 @@
   <template>
   <div>
-      <mt-swipe :auto="0">
+      <mt-swipe :auto="4000">
       <mt-swipe-item v-for="(site,index) in banner" :key="index" >
         <img :src="site.image"/>
       </mt-swipe-item>

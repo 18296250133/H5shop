@@ -5,7 +5,10 @@
     <navbar :bgcolor='backgoundcolors' fontcolor='white' class="nav">
         <div slot="center">购物街</div>
     </navbar>
-
+     
+<mscroll class="mscroll">
+              
+         
     <!-- 轮播图 -->
    <swipe :banner="banner"></swipe>
     
@@ -18,15 +21,16 @@
       </div>
     
     <!-- 分类数据 -->
-    <control :list_category="list_category" @getindex="getindex"/>
-
+     
+<control id="controls" :list_category="list_category" @getindex="getindex" />
 
           <!-- <div v-for="(item,index) in goods[currentVaule].list" :key="index">
               {{currentVaule}}
               <span>{{item.title}}</span>
           </div> -->
-
-          <goodscontainer :goodcurrentlist="goods[currentVaule].list"/>
+  <goodscontainer :goodcurrentlist="goods[currentVaule].list"/>
+     </mscroll>      
+          
 
     </div>
 </template>
@@ -60,7 +64,8 @@ export default {
         swipe:()=> import('./childcomponents/swipe.vue'),
         recommend:()=>import('./childcomponents/recommend.vue'),
         control:()=>import('../../components/content/control/control.vue'),
-        goodscontainer:()=>import('../../components/content/goods/goodscontainer')
+        goodscontainer:()=>import('../../components/content/goods/goodscontainer'),
+        mscroll:()=> import('../../components/common/bretter-scroll/m-scroll')
     },
 
     methods:{
@@ -127,9 +132,11 @@ export default {
 <style  scoped lang="scss">
 
 #box {
-    height: 100%;
+    // height: 100%;
     width: 100%;
-    margin-bottom: px(90)
+    //margin-bottom: px(90);
+     height: 100vh;  //相当于给高度100%
+     position: relative;
 }
  .prevalent {
      width: 100%;
@@ -138,6 +145,26 @@ export default {
  .prevalent img {
       width: 100%;
       height: 100%;
+ }
+ .nav {
+      position: relative;
+    z-index: 9;
+ }
+
+     #controls{
+      position: sticky;
+      top: px(44);
+        background-color: pink;
+        z-index: 9;
+    }
+ 
+ .mscroll {
+      position:absolute;
+    top: px(45);
+    bottom: px(50);
+    left: 0;
+    right: 0;
+     
  }
   
 </style>
