@@ -2,7 +2,7 @@
   <div>
       <mt-swipe :auto="4000">
       <mt-swipe-item v-for="(site,index) in banner" :key="index" >
-        <img :src="site.image"/>
+        <img :src="site.image" @load="swipload"/>
       </mt-swipe-item>
       </mt-swipe>
   </div>
@@ -17,6 +17,11 @@ export default {
             type:Array,
             defauly:[]
         }
+    },
+    methods:{
+      swipload(){
+        this.$emit('swiploading')
+      }
     }
 }
 </script>

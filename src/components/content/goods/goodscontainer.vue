@@ -2,6 +2,7 @@
     <div class="containers">         
              <goodsitem v-for="(value,index) in goodcurrentlist" :key="index"
               :good_items="value" class="gooditem" 
+              @isload="isload"
               ></goodsitem>  
     </div>
 </template>
@@ -23,6 +24,11 @@ export default {
     },
     created(){
         //console.log("goodcurrentlist:",this.goodcurrentlist)
+    },
+    methods:{
+        isload(){
+            this.$emit('isload')
+        }
     }
     
 }

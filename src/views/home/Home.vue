@@ -6,11 +6,13 @@
         <div slot="center">购物街</div>
     </navbar>
      
-<mscroll class="mscroll" ref="scroll" @checkposition="getposition">
+<mscroll class="mscroll" ref="scroll" @checkposition="getposition"
+ @pullingUp="pullingUp">
               
          
     <!-- 轮播图 -->
-   <swipe :banner="banner"></swipe>
+        
+   <swipe :banner="banner" @swiploading="imgload"></swipe>
     
     <!-- 每日推荐 -->
     <recommend :recommend="recommend"/>
@@ -28,7 +30,7 @@
               {{currentVaule}}
               <span>{{item.title}}</span>
           </div> -->
-  <goodscontainer :goodcurrentlist="goods[currentVaule].list"/>
+  <goodscontainer :goodcurrentlist="goods[currentVaule].list" @isload="load"/>
      </mscroll>      
           
      <!-- 回到顶部 -->
@@ -89,6 +91,11 @@ export default {
              console.log('currentVaule:',this.currentVaule);
               
         },
+        pullingUp(){
+            console.log("Daodi");
+            
+            this.gethomecategory(this.currentVaule);
+        },
 
 
     //获取首页分类数据
@@ -101,11 +108,15 @@ export default {
            
            
             getcategory(cata,page).then(res=>{
-               
-                list.push(...res.data.data.list);
+               if(!(res.data.data.list=="" || res.data.data.list==[])){
+                    list.push(...res.data.data.list);
         
                 this.goods[cata].list=list;
                 this.goods[cata].page= ++page;
+
+                this.$refs.scroll.bscroll.finishPullUp();
+               }
+                
             })
            
          
@@ -117,10 +128,20 @@ export default {
         } ,
         //获取子组件传递过来的position值
         getposition(position){
-           console.log(position.y);
+           //console.log(position.y);
             this.showtotop=Math.abs(position.y) >1000 ? true :false;
-            console.log(this.showtotop);
-        }
+           
+        },
+        //监听图片是否加载完
+        load(){
+             console.log("已经加载完 ");
+             this.$refs.scroll.bscroll.refresh();
+        },
+
+        //监听swiper图片是否加载完成
+        imgload(){
+           console.log("swiper图片已加载完");
+        },
            },
      created() {
             //获取banner recommend 数据
@@ -140,6 +161,31 @@ export default {
 
             
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 </script>
 

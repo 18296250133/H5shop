@@ -25,11 +25,7 @@ export default {
     },
 
     methods:{
-        srrollto(){
-            this.bscroll.on('scroll',(position)=>{
-                console.log(position)
-            })
-        }
+       
     },
     mounted(){
         this.bscroll=new BScroll(this.$refs.wrapp,{
@@ -42,13 +38,14 @@ export default {
                 //console.log(position);
                 //发出检听到的事件，然后传递出去
                 this.$emit('checkposition',position);
+            }),
+
+            this.bscroll.on('pullingUp',()=>{
+               // console.log("到底部了");
+                this.$emit('pullingUp')
             })
         }
 
-        //监听滚动的位置
-        // this.bscroll.on('scroll',(position)=>{
-        //    // console.log(position);
-        // })
 
     
 }

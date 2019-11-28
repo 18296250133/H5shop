@@ -1,7 +1,7 @@
 <template>
     <div class="box">
         <div class="item-img">
-        <img :src="good_items.show.img"/>
+        <img :src="good_items.show.img"  @load="isload"/>
         </div>
         <div class="info">
             <div class="title">{{good_items.title}}</div>
@@ -28,6 +28,11 @@ export default {
     created(){
         console.log(11)
         //console.log('good_items:',this.good_items);
+    },
+    methods:{
+        isload(){
+            this.$emit('isload')
+        }
     }
 }
 </script>
