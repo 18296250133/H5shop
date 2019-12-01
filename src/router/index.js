@@ -17,6 +17,10 @@ const routes = [
     
   },
   {
+     path:'/detail/:iid',
+     component:()=>import('../views/home/Detail.vue')
+  },
+  {
     path:'/category',
     component:()=> import('../views/category/Category.vue')
     

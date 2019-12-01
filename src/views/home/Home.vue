@@ -5,7 +5,7 @@
     <navbar :bgcolor='backgoundcolors' fontcolor='white' class="nav">
         <div slot="center">购物街</div>
     </navbar>
-     
+     <control id="controls" :list_category="list_category" @getindex="getindex" ref="control" v-show="iscontrolshow"/>
 <mscroll class="mscroll" ref="scroll" @checkposition="getposition"
  @pullingUp="pullingUp">
               
@@ -24,7 +24,7 @@
     
     <!-- 分类数据 -->
      
-<control id="controls" :list_category="list_category" @getindex="getindex" />
+<control id="controls" :list_category="list_category" @getindex="getindex" ref="control"/>
 
           <!-- <div v-for="(item,index) in goods[currentVaule].list" :key="index">
               {{currentVaule}}
@@ -58,7 +58,9 @@ export default {
                 'sell':{page:1,list:[]},
             },
             currentVaule:'pop',
-            showtotop:false
+            showtotop:false,
+            offsetTop:0,
+            iscontrolshow:false , //是否显示吸顶状态的control
             
         }
     },
@@ -128,8 +130,9 @@ export default {
         } ,
         //获取子组件传递过来的position值
         getposition(position){
-           //console.log(position.y);
             this.showtotop=Math.abs(position.y) >1000 ? true :false;
+          this.iscontrolshow= Math.abs(position.y) > this.offsetTop? true :false; //offsetTop <position.y 就显示吸顶状态的control
+          
            
         },
         //监听图片是否加载完
@@ -141,6 +144,9 @@ export default {
         //监听swiper图片是否加载完成
         imgload(){
            console.log("swiper图片已加载完");
+           console.log(this.$refs.control.$el.offsetTop);
+           this.offsetTop=this.$refs.control.$el.offsetTop;
+
         },
            },
      created() {

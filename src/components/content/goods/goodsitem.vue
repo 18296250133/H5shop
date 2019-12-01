@@ -1,5 +1,5 @@
 <template>
-    <div class="box">
+    <div class="box" @click="godetail(good_items.iid)">
         <div class="item-img">
         <img :src="good_items.show.img"  @load="isload"/>
         </div>
@@ -26,12 +26,15 @@ export default {
         }
     },
     created(){
-        console.log(11)
-        //console.log('good_items:',this.good_items);
+       
+      
     },
     methods:{
         isload(){
             this.$emit('isload')
+        },
+        godetail(iid){
+            this.$router.push('/detail/'+iid);
         }
     }
 }
